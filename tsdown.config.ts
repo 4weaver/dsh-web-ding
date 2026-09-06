@@ -62,7 +62,6 @@ const CLIENT_EXTERNALS = [
   'react',
   'react/jsx-runtime',
   'cordis',
-  '@deepseek-ai/dsh-client-runtime/client',
   '@deepseek-ai/dsh-client-ui-slots',
 ]
 

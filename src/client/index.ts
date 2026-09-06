@@ -11,7 +11,7 @@
  * State persists via localStorage (store.ts): reverse-proxied browsers only
  * get memory persistence from the framework settings transport.
  */
-import type { ClientContext } from '@deepseek-ai/dsh-client-runtime/client'
+import type { Context as CordisContext } from '@deepseek-ai/cordis'
 import { TurnWatch } from './TurnWatch.tsx'
 import { WebDingSection } from './WebDingSection.tsx'
 
@@ -26,8 +26,10 @@ type SlotsService = {
   ): unknown
 }
 
+type ClientContext = CordisContext & { slots: SlotsService }
+
 export function apply(ctx: ClientContext): void {
-  const slots = ctx.slots as unknown as SlotsService
+  const slots = ctx.slots
 
   slots.inject('conversation.session.header.actions', () =>
     slots.register(
