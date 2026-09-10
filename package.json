@@ -62,10 +62,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/an4nsi/dsh-web-ding.git"
+    "url": "git+https://github.com/4weaver/dsh-web-ding.git"
   },
   "bugs": {
-    "url": "https://github.com/an4nsi/dsh-web-ding/issues"
+    "url": "https://github.com/4weaver/dsh-web-ding/issues"
   },
-  "homepage": "https://github.com/an4nsi/dsh-web-ding#readme"
+  "homepage": "https://github.com/4weaver/dsh-web-ding#readme"
 }
