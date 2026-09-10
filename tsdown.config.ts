@@ -38,15 +38,14 @@ function dshCssModules(id: string) {
         cssModules: { pattern: '[hash]_[local]' },
         minify: true,
       })
-      const classMap: Record<string, string> = {}
       // lightningcss returns `exports` with a NONDETERMINISTIC key order (5 direct
       // transform() calls on one .module.css gave 5 different orders), which made
       // this bundle's class-map JSON shuffle run to run and lib/client.js
-      // irreproducible. Sorting the keys pins the serialization; emitted class
-      // names and hashes are unaffected.
-      for (const [local, exp] of Object.entries(cssExports ?? {})) classMap[local] = exp.name
-      const sortedClassMap: Record<string, string> = {}
-      for (const local of Object.keys(classMap).sort()) sortedClassMap[local] = classMap[local]
+      // irreproducible. Iterating the keys sorted pins the serialization; emitted
+      // class names and hashes are unaffected.
+      const classMap: Record<string, string> = {}
+      const exports_ = cssExports ?? {}
+      for (const local of Object.keys(exports_).sort()) classMap[local] = exports_[local].name
       return [
         `const css = ${JSON.stringify(code.toString())};`,
         `const tagId = ${JSON.stringify(`${id}/${basename(fileId)}`)};`,
@@ -56,7 +55,7 @@ function dshCssModules(id: string) {
         `  tag.textContent = css;`,
         `  document.head.appendChild(tag);`,
         `}`,
-        `export default ${JSON.stringify(sortedClassMap)};`,
+        `export default ${JSON.stringify(classMap)};`,
       ].join('\n')
     },
   }

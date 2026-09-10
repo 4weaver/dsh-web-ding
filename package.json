@@ -38,6 +38,7 @@
   "scripts": {
     "build": "tsdown",
     "typecheck": "tsc --noEmit",
+    "build:checked": "npm run typecheck && npm run build",
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
